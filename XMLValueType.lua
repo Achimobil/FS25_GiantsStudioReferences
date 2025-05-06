@@ -1,0 +1,25 @@
+XMLValueType = {};
+
+XMLValueType.STRING = 1;
+XMLValueType.STRING_LIST = 2;
+XMLValueType.L10N_STRING = 3;
+XMLValueType.FILENAME = 4;
+XMLValueType.FLOAT = 5;
+XMLValueType.ANGLE = 6;
+XMLValueType.TIME = 7;
+XMLValueType.DAY_TIME = 8;
+XMLValueType.INT = 9;
+XMLValueType.UINT = 10;
+XMLValueType.BOOL = 11;
+XMLValueType.NODE_INDEX = 12;
+XMLValueType.NODE_INDICES = 13;
+XMLValueType.VECTOR_2 = 14;
+XMLValueType.VECTOR_3 = 15;
+XMLValueType.VECTOR_4 = 16;
+XMLValueType.VECTOR_N = 17;
+XMLValueType.VECTOR_TRANS = 18;
+XMLValueType.VECTOR_ROT = 19;
+XMLValueType.VECTOR_ROT_2 = 20;
+XMLValueType.VECTOR_SCALE = 21;
+XMLValueType.COLOR = 22;
+XMLValueType.VEHICLE_MATERIAL = 23;

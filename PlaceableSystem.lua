@@ -1,0 +1,2 @@
+PlaceableSystem = {}
+PlaceableSystem.placeables = {}

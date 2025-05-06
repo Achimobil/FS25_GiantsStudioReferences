@@ -1,0 +1,2 @@
+HUD = {}
+HUD.controlledVehicle = Vehicle;

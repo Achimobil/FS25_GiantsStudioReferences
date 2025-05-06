@@ -1,0 +1,1 @@
+AnimalType = nil;

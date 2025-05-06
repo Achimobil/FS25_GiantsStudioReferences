@@ -1,0 +1,2 @@
+HusbandrySystem = {}
+HusbandrySystem.placeables = {}
