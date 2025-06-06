@@ -8,3 +8,6 @@ end
 
 function SpecializationUtil.registerOverwrittenFunction(objectType, funcName, func)
 end
+
+function SpecializationUtil.hasSpecialization(specialization, specializations)
+end
