@@ -28,6 +28,16 @@ function FSBaseMission:getFarmId()
     return 1;
 end
 
+---Has the Player a certain permission
+-- @param string permission permission
+-- @param table? connection connection
+-- @param integer? farmId
+-- @param boolean? unknown nicht bekannt
+-- @return boolean true if permission granted
+function FSBaseMission:getHasPlayerPermission(permission, connection, farmId, unknown)
+    return true;
+end
+
 g_currentMission = FSBaseMission.new();
 
 ---This is sub class of FSBaseMission
