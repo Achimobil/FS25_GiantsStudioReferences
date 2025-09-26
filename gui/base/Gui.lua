@@ -1,4 +1,5 @@
 Gui = {};
+Gui.screenControllers = {}
 
 local Gui_mt = Class(Gui);
 
