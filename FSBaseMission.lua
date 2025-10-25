@@ -3,11 +3,11 @@ FSBaseMission = {};
 FSBaseMission.activatableObjectsSystem = ActivatableObjectsSystem;
 FSBaseMission.storageSystem = StorageSystem;
 FSBaseMission.productionChainManager = ProductionChainManager;
-FSBaseMission.husbandrySystem = HusbandrySystem;
+FSBaseMission.husbandrySystem = HusbandrySystem.new()
 FSBaseMission.placeableSystem = PlaceableSystem;
 FSBaseMission.environment = Environment;
 FSBaseMission.missionInfo = FSCareerMissionInfo;
-
+FSBaseMission.animalSystem = AnimalSystem.new();
 FSBaseMission.isExitingGame = false;
 FSBaseMission.hud = HUD;
 
@@ -19,6 +19,8 @@ local FSBaseMission_mt = Class(FSBaseMission, BaseMission)
 -- @return FSBaseMission newObject
 function FSBaseMission.new(baseDirectory, customMt)
     local self = FSBaseMission:superClass().new(baseDirectory, customMt or FSBaseMission_mt);
+    self.animalFoodSystem = AnimalFoodSystem.new(self);
+    self.animalSystem = AnimalSystem.new();
     return self;
 end
 

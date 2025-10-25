@@ -1,5 +1,6 @@
 BaseMission = {};
 BaseMission.nodeToObject = {}
+BaseMission.currentMapTargetHotspot = {}
 
 local BaseMission_mt = Class(BaseMission);
 
@@ -8,7 +9,8 @@ local BaseMission_mt = Class(BaseMission);
 -- @return BaseMission newObject
 function BaseMission.new(baseDirectory, customMt)
     local self = setmetatable({}, customMt or BaseMission_mt);
-    self.maps = {}
+    self.maps = {};
+    self.isRunning = false;
     return self;
 end
 
