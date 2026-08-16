@@ -1,3 +1,4 @@
+---@class ProductionPoint
 ProductionPoint = {};
 
 ProductionPoint.OUTPUT_MODE = {};
@@ -21,12 +22,12 @@ ProductionPoint.PROD_STATUS_TO_L10N = {
 
 local ProductionPoint_mt = Class(ProductionPoint, Object);
 
---- create new instance
--- @param boolean isServer
--- @param boolean isClient
--- @param string baseDirectory
--- @param table customMt
--- @return ProductionPoint newObject
+---Creates a new instance
+---@param isServer boolean is server
+---@param isClient boolean is client
+---@param baseDirectory string base directory
+---@param customMt? table custom metatable for the subclass instance
+---@return ProductionPoint newObject
 function ProductionPoint.new(isServer, isClient, baseDirectory, customMt)
     local self = Object.new(isServer, isClient, customMt or ProductionPoint_mt);
 

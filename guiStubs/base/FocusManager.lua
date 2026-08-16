@@ -1,3 +1,4 @@
+---@class FocusManager
 FocusManager = {
     ["TOP"] = "top",
     ["BOTTOM"] = "bottom",

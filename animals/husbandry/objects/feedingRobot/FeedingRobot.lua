@@ -1,1 +1,2 @@
+---@class FeedingRobot
 FeedingRobot = {};

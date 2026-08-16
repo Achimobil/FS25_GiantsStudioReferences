@@ -1,10 +1,12 @@
+---@class GuiElement
 GuiElement = {}
 
 local GuiElement_mt = Class(GuiElement)
 
---- create new instance
--- @param table customMt
--- @return GuiElement newObject
+---Creates a new instance
+---@param target table|nil
+---@param customMt table|nil
+---@return GuiElement
 function GuiElement.new(target, customMt)
     local self = setmetatable({}, customMt or GuiElement_mt);
     self.target = target;

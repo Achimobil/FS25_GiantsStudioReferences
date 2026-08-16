@@ -1,5 +1,9 @@
+---@class Farm
 Farm = {};
 
+local Farm_mt = Class(Farm, Object);
+
+Farm.farmId = 0;
 Farm.name = "";
 
 Farm.PERMISSION = {
@@ -20,3 +24,14 @@ Farm.PERMISSION = {
     ["UPDATE_FARM"] = "updateFarm",
     ["MANAGE_CONTRACTING"] = "manageContracting"
 }
+
+---Creates a new instance
+---@param isServer boolean is server
+---@param isClient boolean is client
+---@param spectator? boolean is spectator farm
+---@param customMt? table custom metatable for the subclass instance
+---@return Farm
+function Farm.new(isServer, isClient, spectator, customMt)
+    local self = Object.new(isServer, isClient, customMt or Farm_mt);
+    return self;
+end

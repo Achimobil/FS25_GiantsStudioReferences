@@ -1,3 +1,4 @@
+---@class BunkerSilo
 BunkerSilo = {}
 local BunkerSilo_mt = Class(BunkerSilo, Object);
 BunkerSilo.STATE_FILL = 0;
@@ -7,11 +8,11 @@ BunkerSilo.STATE_DRAIN = 3;
 BunkerSilo.NUM_STATES = 4;
 BunkerSilo.COMPACTING_BASE_MASS = 5;
 
----Creating bunker silo object
--- @param boolean isServer is server
--- @param boolean isClient is client
--- @param table? customMt customMt
--- @return table instance Instance of object
+---Creates a new bunker silo object instance
+---@param isServer boolean is server
+---@param isClient boolean is client
+---@param customMt? table custom metatable for the subclass instance
+---@return table instance instance of the object
 function BunkerSilo.new(isServer, isClient, customMt)
     local self = Object.new(isServer, isClient, customMt or BunkerSilo_mt)
 
@@ -58,12 +59,12 @@ function BunkerSilo.new(isServer, isClient, customMt)
     return self
 end
 
----Load bunker silo
--- @param table components components
--- @param table xmlFile xml file object
--- @param string key xml key
--- @param table i3dMappings i3dMappings
--- @return boolean success success
+---Loads the bunker silo from the placeable's i3d components/XML
+---@param components table i3d components
+---@param xmlFile table xml file object
+---@param key string xml key
+---@param i3dMappings table i3d mappings
+---@return boolean success success
 function BunkerSilo:load(components, xmlFile, key, i3dMappings)
     self.bunkerSiloArea.start = xmlFile:getValue(key..".area#startNode", nil, components, i3dMappings)
     self.bunkerSiloArea.width = xmlFile:getValue(key..".area#widthNode", nil, components, i3dMappings)
@@ -156,7 +157,9 @@ function BunkerSilo:load(components, xmlFile, key, i3dMappings)
     return true
 end
 
----
+---Registers the XML schema paths used to save/load this bunker silo's state to/from a savegame
+---@param schema table savegame XML schema
+---@param basePath string base xml key path
 function BunkerSilo.registerSavegameXMLPaths(schema, basePath)
     schema:register(XMLValueType.INT, basePath .. "#state", "Current silo state (FILL = 0, CLOSED = 1, FERMENTED = 2, DRAIN = 3)", 0)
     schema:register(XMLValueType.FLOAT, basePath .. "#fillLevel", "Current fill level")
@@ -166,10 +169,10 @@ function BunkerSilo.registerSavegameXMLPaths(schema, basePath)
     schema:register(XMLValueType.BOOL, basePath .. "#openedAtBack", "Is opened at back", false)
 end
 
----Save to XML file
--- @param XMLFile xmlFile XMLFile instance
--- @param string key key
--- @param table usedModNames list of use dmod names
+---Saves the bunker silo state to an XML file
+---@param xmlFile table XMLFile instance
+---@param key string xml key
+---@param usedModNames table list of used mod names
 function BunkerSilo:saveToXMLFile(xmlFile, key, usedModNames)
     xmlFile:setValue(key.."#state", self.state)
     xmlFile:setValue(key.."#fillLevel", self.fillLevel)
@@ -179,10 +182,10 @@ function BunkerSilo:saveToXMLFile(xmlFile, key, usedModNames)
     xmlFile:setValue(key.."#openedAtBack", self.isOpenedAtBack)
 end
 
----Loading from attributes and nodes
--- @param XMLFile xmlFile XMLFile instance
--- @param string key key
--- @return boolean success success
+---Loads the bunker silo state from an XML file
+---@param xmlFile table XMLFile instance
+---@param key string xml key
+---@return boolean success success
 function BunkerSilo:loadFromXMLFile(xmlFile, key)
 
     local state = xmlFile:getValue(key.."#state")
@@ -273,8 +276,8 @@ function BunkerSilo:loadFromXMLFile(xmlFile, key)
 end
 
 ---Called on client side on join
--- @param integer streamId stream ID
--- @param table connection connection
+---@param streamId integer network stream identification
+---@param connection table connection information
 function BunkerSilo:readStream(streamId, connection)
     BunkerSilo:superClass().readStream(self, streamId, connection)
     if connection:getIsServer() then
@@ -289,8 +292,8 @@ function BunkerSilo:readStream(streamId, connection)
 end
 
 ---Called on server side on join
--- @param integer streamId stream ID
--- @param table connection connection
+---@param streamId integer network stream identification
+---@param connection table connection information
 function BunkerSilo:writeStream(streamId, connection)
     BunkerSilo:superClass().writeStream(self, streamId, connection)
     if not connection:getIsServer() then
@@ -304,9 +307,9 @@ function BunkerSilo:writeStream(streamId, connection)
 end
 
 ---Called on client side on update
--- @param integer streamId stream ID
--- @param integer timestamp timestamp
--- @param table connection connection
+---@param streamId integer network stream identification
+---@param timestamp integer server timestamp
+---@param connection table connection information
 function BunkerSilo:readUpdateStream(streamId, timestamp, connection)
     BunkerSilo:superClass().readUpdateStream(self, streamId, timestamp, connection)
     if connection:getIsServer() then
@@ -331,9 +334,9 @@ end
 
 
 ---Called on server side on update
--- @param integer streamId stream ID
--- @param table connection connection
--- @param integer dirtyMask dirty mask
+---@param streamId integer network stream identification
+---@param connection table connection information
+---@param dirtyMask integer dirty mask
 function BunkerSilo:writeUpdateStream(streamId, connection, dirtyMask)
     BunkerSilo:superClass().writeUpdateStream(self, streamId, connection, dirtyMask)
     if not connection:getIsServer() then
@@ -353,8 +356,8 @@ function BunkerSilo:writeUpdateStream(streamId, connection, dirtyMask)
     end
 end
 
----UpdateTick
--- @param float dt time since last call in ms
+---Called every frame update
+---@param dt number time since last call in ms
 function BunkerSilo:updateTick(dt)
     if self.isServer then
         self.updateTimer = self.updateTimer - dt
@@ -374,13 +377,13 @@ function BunkerSilo:updateTick(dt)
     end
 end
 
----interactionTriggerCallback
--- @param integer triggerId id of trigger
--- @param integer otherId id of actor
--- @param boolean onEnter on enter
--- @param boolean onLeave on leave
--- @param boolean onStay on stay
--- @param integer otherId id of other actor
+---Called by the interaction trigger on enter/leave/stay
+---@param triggerId integer id of the trigger
+---@param otherId integer id of the actor
+---@param onEnter boolean on enter
+---@param onLeave boolean on leave
+---@param onStay boolean on stay
+---@param otherShapeId integer id of the other shape
 function BunkerSilo:interactionTriggerCallback(triggerId, otherId, onEnter, onLeave, onStay, otherShapeId)
     if onEnter or onLeave then
         if g_localPlayer ~= nil and otherId == g_localPlayer.rootNode then
@@ -428,11 +431,11 @@ function BunkerSilo:interactionTriggerCallback(triggerId, otherId, onEnter, onLe
     end
 end
 
----Get bunker area offset
--- @param boolean updateAtFront update at front
--- @param float offset offset
--- @param integer fillType fill type
--- @return float offset offset
+---Gets the bunker area offset
+---@param updateAtFront boolean update at front
+---@param offset number offset
+---@param fillType integer fill type
+---@return number offset offset
 function BunkerSilo:getBunkerAreaOffset(updateAtFront, offset, fillType)
     local area = self.bunkerSiloArea
 

@@ -1,3 +1,4 @@
+---@class FSBaseMission
 FSBaseMission = {};
 
 FSBaseMission.activatableObjectsSystem = ActivatableObjectsSystem;
@@ -13,10 +14,10 @@ FSBaseMission.hud = HUD;
 
 local FSBaseMission_mt = Class(FSBaseMission, BaseMission)
 
---- create new instance
--- @param string baseDirectory
--- @param table customMt
--- @return FSBaseMission newObject
+---Creates a new instance
+---@param baseDirectory string base directory used to resolve mod/map relative paths
+---@param customMt? table custom metatable for the subclass instance
+---@return FSBaseMission newObject
 function FSBaseMission.new(baseDirectory, customMt)
     local self = FSBaseMission:superClass().new(baseDirectory, customMt or FSBaseMission_mt);
     self.animalFoodSystem = AnimalFoodSystem;
@@ -24,18 +25,18 @@ function FSBaseMission.new(baseDirectory, customMt)
     return self;
 end
 
----Get the Farm Id of the current player
--- @return integer farmId
+---Gets the farm id of the current player
+---@return integer farmId
 function FSBaseMission:getFarmId()
     return 1;
 end
 
----Has the Player a certain permission
--- @param string permission permission
--- @param table? connection connection
--- @param integer? farmId
--- @param boolean? unknown nicht bekannt
--- @return boolean true if permission granted
+---Checks whether the player has a certain permission
+---@param permission string permission to check
+---@param connection? table connection
+---@param farmId? integer
+---@param unknown? boolean nicht bekannt
+---@return boolean true if permission granted
 function FSBaseMission:getHasPlayerPermission(permission, connection, farmId, unknown)
     return true;
 end

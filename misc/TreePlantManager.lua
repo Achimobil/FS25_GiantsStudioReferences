@@ -1,17 +1,18 @@
+---@class TreePlantManager
 TreePlantManager = {};
 
 local TreePlantManager_mt = Class(TreePlantManager, AbstractManager)
 
---- create new instance
--- @param table customMt
--- @return TreePlantManager newObject
+---Creates a new instance
+---@param customMt? table custom metatable for the subclass instance
+---@return TreePlantManager
 function TreePlantManager.new(customMt)
     local self = AbstractManager.new(customMt or TreePlantManager_mt)
 
     return self
 end
 
----
+---Initializes the tree plant manager's runtime data (called once on mission start)
 function TreePlantManager:initialize()
     local rootNode = createTransformGroup("trees")
     link(getRootNode(), rootNode)
@@ -26,7 +27,9 @@ function TreePlantManager:initialize()
     self.treesData.numTreesWithoutSplits = 0
 end
 
----
+---Returns the tree type description for the given tree type index
+---@param index integer tree type index
+---@return table? treeTypeDesc
 function TreePlantManager:getTreeTypeDescFromIndex(index)
     if self.treeTypes ~= nil then
         return self.treeTypes[index]

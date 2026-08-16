@@ -1,3 +1,4 @@
+---@class Placeable
 Placeable = {};
 
 Placeable.xmlSchemaSavegame = XMLSchema.new("savegame_placeables")

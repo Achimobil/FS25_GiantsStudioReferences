@@ -1,10 +1,10 @@
 PowerConsumer = {};
 
 ---Loads needed power spec value
--- @param integer xmlFile id of xml object
--- @param string|any customEnvironment custom environment
--- @param string|any baseDir baseDir
--- @return float neededPower needed power
+---@param xmlFile XMLFile xml file to load the value from
+---@param customEnvironment any custom environment
+---@param baseDir any base directory
+---@return table neededPower needed power
 function PowerConsumer.loadSpecValueNeededPower(xmlFile, customEnvironment, baseDir)
     local neededPower = {}
     neededPower.base = xmlFile:getValue("vehicle.storeData.specs.neededPower")

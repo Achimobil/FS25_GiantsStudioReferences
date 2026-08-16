@@ -5,16 +5,16 @@ g_currentModDirectory = "CurrentModName";
 ---Add trigger to a rigid body shape
 ---@param triggerNodeId integer
 ---@param callbackFunctionName string callback(entityId triggerId, entityId otherId, boolean onEnter, boolean onLeave, boolean onStay, entityId otherShapeId, integer subShapeIndex)
----@param callbackTarget object? target object [optional]
----@param reportOnStay boolean? if true, the callback function is called every frame while an object is inside [optional, default=false]
----@param callbackFunction object? a function object that is called. If nil, callback is called by the 'callbackFunctionName' and 'callbackTarget' [optional, default=nil]
+---@param callbackTarget? table target object [optional]
+---@param reportOnStay? boolean if true, the callback function is called every frame while an object is inside [optional, default=false]
+---@param callbackFunction? function a function that is called. If nil, callback is called by the 'callbackFunctionName' and 'callbackTarget' [optional, default=nil]
 ---@return integer callbackId
 function addTrigger(triggerNodeId, callbackFunctionName, callbackTarget, reportOnStay, callbackFunction)
 end
 
 ---Remove trigger
 ---@param triggerNodeId integer
----@param callbackId integer? [optional] if not provided, the callback with no callbackFunction is removed
+---@param callbackId? integer [optional] if not provided, the callback with no callbackFunction is removed
 function removeTrigger(triggerNodeId, callbackId)
 end
 

@@ -1,11 +1,12 @@
+---@class Environment
 Environment = {};
 Environment.lighting = Lighting.new();
 
 local Environment_mt = Class(Environment);
 
---- create new instance
--- @param table mission
--- @return Environment newObject
+---Creates a new instance
+---@param mission table
+---@return Environment newObject
 function Environment.new(mission)
     local self = setmetatable({}, Environment_mt);
 
