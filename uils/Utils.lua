@@ -8,6 +8,3 @@ end
 
 function Utils.getNoNil(first, second)
 end
-
-function Utils.overwrittenFunction(first, second)
-end

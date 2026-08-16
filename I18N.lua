@@ -44,4 +44,12 @@ function I18N:formatNumMonth(month)
     return "";
 end
 
+function I18N:formatMinutes(minutes)
+    return "";
+end
+
+function I18N:formatMoney(number, precision, addCurrency, prefixCurrencySymbol)
+    return "";
+end
+
 g_i18n = I18N;

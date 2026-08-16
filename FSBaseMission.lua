@@ -19,7 +19,7 @@ local FSBaseMission_mt = Class(FSBaseMission, BaseMission)
 -- @return FSBaseMission newObject
 function FSBaseMission.new(baseDirectory, customMt)
     local self = FSBaseMission:superClass().new(baseDirectory, customMt or FSBaseMission_mt);
-    self.animalFoodSystem = AnimalFoodSystem.new(self);
+    self.animalFoodSystem = AnimalFoodSystem;
     self.animalSystem = AnimalSystem.new();
     return self;
 end

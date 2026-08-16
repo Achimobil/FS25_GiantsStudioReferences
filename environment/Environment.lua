@@ -17,6 +17,7 @@ function Environment.new(mission)
     self.currentHour = 1;
     self.daysPerPeriod = 1;
     self.timeAdjustment = 1 / self.daysPerPeriod;
+    self.weather = Weather.new(self)
 
     return self;
 end

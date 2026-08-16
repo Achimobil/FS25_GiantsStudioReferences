@@ -21,3 +21,7 @@ end
 function AnimalSystem:getSubTypeByIndex(index)
     return {};
 end
+
+function AnimalSystem:getTypeIndexBySubTypeIndex(subTypeIndex)
+    return {};
+end

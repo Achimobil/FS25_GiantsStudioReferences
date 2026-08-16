@@ -1,4 +1,5 @@
 AnimalFoodSystem = {};
+
 local AnimalFoodSystem_mt = Class(AnimalFoodSystem);
 
 AnimalFoodSystem.FOOD_CONSUME_TYPE_SERIAL = 1;
@@ -7,7 +8,7 @@ AnimalFoodSystem.FOOD_CONSUME_TYPE_PARALLEL = 2;
 --- create new instance
 -- @param BaseMission mission
 -- @param table? customMt
--- @return AnimalFoodSystem newObject
+-- @return AnimalFoodSystem AnimalFoodSystem
 function AnimalFoodSystem.new(mission, customMt)
     local self = setmetatable({}, customMt or AnimalFoodSystem_mt);
     self.animalTypeIndexToFood = {};

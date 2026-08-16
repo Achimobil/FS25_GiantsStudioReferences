@@ -19,9 +19,15 @@ end
 function BaseMission:getIsServer()
 end
 
+--- Get the object mapped to a scene node id.
+-- @param integer nodeId
+-- @return Object|nil object  Instance mapped to `nodeId` (e.g. Vehicle, Player, Farm, Placeable), or nil if not found.
 function BaseMission:getNodeObject(nodeId)
     return 1;
 end
 
 function BaseMission:addUpdateable(node, customKey)
+end
+
+function BaseMission:setMapTargetHotspot(mapHotspot)
 end

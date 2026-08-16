@@ -1,0 +1,3 @@
+MouseHelper = {};
+KeyboardHelper = {};
+GamepadHelper = {};
